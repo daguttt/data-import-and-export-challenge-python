@@ -1,10 +1,15 @@
 import random
+import sys
 from datetime import datetime, timedelta
 from pathlib import Path
+
+# Add the src directory to the Python path
+sys.path.append(str(Path(__file__).parent.parent))
 
 import pandas as pd
 from faker import Faker
 
+from src.customer_statuses import CUSTOMER_STATUSES
 
 COUNTRIES = [
     "Colombia",
@@ -17,12 +22,6 @@ COUNTRIES = [
     "Bolivia",
     "Uruguay",
     "Paraguay",
-]
-CUSTOMER_STATUSES = [
-    "ACTIVE",
-    "INACTIVE",
-    "PENDING",
-    "SUSPENDED",
 ]
 
 
