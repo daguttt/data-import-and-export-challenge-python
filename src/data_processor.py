@@ -12,6 +12,8 @@ from src.customer_statuses import CUSTOMER_STATUSES
 # Load environment variables
 load_dotenv()
 
+EMAIL_REGEX = r"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+
 
 class DataProcessor:
     def __init__(self):
@@ -48,7 +50,7 @@ class DataProcessor:
         df = df.drop_duplicates(subset=["email"])
 
         # Exclude records with invalid emails
-        df = df[df["email"].str.contains("@", na=False)]
+        df = df[df["email"].str.contains(EMAIL_REGEX, na=False)]
 
         # Convert timestamp column
         df["created_at"] = pd.to_datetime(df["created_at"])
