@@ -44,16 +44,16 @@ class DataProcessor:
 
     def _clean_data(self, df: pd.DataFrame) -> pd.DataFrame:
         """Clean and validate data"""
-        # Remove duplicates
+        # Remove record duplicates
         df = df.drop_duplicates(subset=["email"])
 
-        # Validate basic email format
+        # Exclude records with invalid emails
         df = df[df["email"].str.contains("@", na=False)]
 
         # Convert timestamp column
         df["created_at"] = pd.to_datetime(df["created_at"])
 
-        # Ensure status is valid
+        # Exclude records with invalid status
         df = df[df["status"].isin(CUSTOMER_STATUSES)]
 
         return df
